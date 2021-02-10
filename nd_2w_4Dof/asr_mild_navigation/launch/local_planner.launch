@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find mybot_navigation)/maps/map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!--Place map frame at odometry frame --> 
+   <!-- <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/> -->
+
+
+  <!-- Localization -->
+   <!-- <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <remap from="scan" to="mybot/laser/scan"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_model_type" value="diff-corrected"/>
+    <param name="base_frame_id" value="chassis"/>
+    <param name="update_min_d" value="0.5"/>
+    <param name="update_min_a" value="1.0"/> 
+  </node> -->
+  <!-- include file="$(find amcl)/examples/amcl_omni.launch"/-->
+
+
+
+  <!-- Move base -->
+ <node   name="move_base" pkg="asr_move_base" type="move_base" respawn="false"  output="screen">
+   <param name="controller_frequency" value="3"/>
+   <param name="planner_frequency" value="3"/>
+   <param name="base_global_planner" value="navfn/NavfnROS"/>
+   <param name="base_local_planner" value="ftc_local_planner/FTCPlanner" />
+   <rosparam file="$(find asr_mild_navigation)/param/simulation/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+   <rosparam file="$(find asr_mild_navigation)/param/simulation/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+   <rosparam file="$(find asr_mild_navigation)/param/simulation/global_costmap_params.yaml" command="load"/>
+   <rosparam file="$(find asr_mild_navigation)/param/simulation/local_costmap_params.yaml" command="load"/>
+   <rosparam file="$(find asr_mild_navigation)/param/simulation/ftc_local_planner_params.yaml" command="load"/>
+ </node>
+
+
+
+</launch>
