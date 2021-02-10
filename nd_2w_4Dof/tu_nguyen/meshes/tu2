@@ -1,0 +1,618 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='tu_nguyen'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.000784 -0.00078 0.036251 0 -0 0</pose>
+          <mass>0.35184</mass>
+          <inertia>
+            <ixx>0.00085551</ixx>
+            <ixy>3.9719e-05</ixy>
+            <ixz>-8.5247e-07</ixz>
+            <iyy>0.00085359</iyy>
+            <iyz>8.7202e-07</iyz>
+            <izz>0.0015197</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='link_1'>
+        <pose frame=''>0 0 0.06 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>3.4e-05 0.011453 0.016551 0 -0 0</pose>
+          <mass>0.17883</mass>
+          <inertia>
+            <ixx>0.0001965</ixx>
+            <ixy>2.8865e-09</ixy>
+            <ixz>2.0476e-08</ixz>
+            <iyy>0.00018359</iyy>
+            <iyz>-6.3455e-06</iyz>
+            <izz>0.0003234</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_1_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_1.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_1' type='revolute'>
+        <child>link_1</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.708</lower>
+            <upper>1.708</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='link_2'>
+        <pose frame=''>0.000105 -0.024031 0.104 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0.023022 0.056301 0 -0 0</pose>
+          <mass>0.073669</mass>
+          <inertia>
+            <ixx>0.00011985</ixx>
+            <ixy>4.0562e-11</ixy>
+            <ixz>1.6465e-10</ixz>
+            <iyy>0.0001173</iyy>
+            <iyz>-3.611e-07</iyz>
+            <izz>1.434e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_2_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_2' type='revolute'>
+        <child>link_2</child>
+        <parent>link_1</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.708</lower>
+            <upper>1.708</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='link_3'>
+        <pose frame=''>0.000105 -0.024031 0.22594 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-4e-06 0.029107 0.056927 0 -0 0</pose>
+          <mass>0.085355</mass>
+          <inertia>
+            <ixx>5.06192e-05</ixx>
+            <ixy>-3.09386e-11</ixy>
+            <ixz>-1.35945e-08</ixz>
+            <iyy>5.28546e-05</iyy>
+            <iyz>3.20777e-08</iyz>
+            <izz>5.15582e-06</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_3_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_3.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_3.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_3' type='revolute'>
+        <child>link_3</child>
+        <parent>link_2</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.708</lower>
+            <upper>1.708</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='link_4'>
+        <pose frame=''>0.000105 -0.024031 0.33994 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0.012074 0.036075 0.057906 0 -0 0</pose>
+          <mass>0.0614392</mass>
+          <inertia>
+            <ixx>2.83548e-05</ixx>
+            <ixy>9.29958e-08</ixy>
+            <ixz>2.44977e-10</ixz>
+            <iyy>1.17555e-05</iyy>
+            <iyz>-4.17688e-07</iyz>
+            <izz>2.00998e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_4_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_4.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_4.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_4' type='revolute'>
+        <child>link_4</child>
+        <parent>link_3</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.708</lower>
+            <upper>1.708</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='link_51'>
+        <pose frame=''>0.001605 -0.014355 0.41619 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.0015 -0.002912 0.034242 0 -0 0</pose>
+          <mass>0.00475483</mass>
+          <inertia>
+            <ixx>4.94751e-06</ixx>
+            <ixy>6.03151e-13</ixy>
+            <ixz>2.32482e-12</ixz>
+            <iyy>4.41447e-06</iyy>
+            <iyz>-5.045e-07</iyz>
+            <izz>5.4368e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_51_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_51.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_51_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_51.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_51' type='revolute'>
+        <child>link_51</child>
+        <parent>link_4</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.4</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='link_52'>
+        <pose frame=''>0.001605 0.012645 0.41619 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.0015 0.002908 0.034275 0 -0 0</pose>
+          <mass>0.00475476</mass>
+          <inertia>
+            <ixx>4.93712e-06</ixx>
+            <ixy>6.02978e-13</ixy>
+            <ixz>-2.32506e-12</ixz>
+            <iyy>4.40384e-06</iyy>
+            <iyz>5.04733e-07</iyz>
+            <izz>5.4392e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='link_52_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_52.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='link_52_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/oguz/mybot_ws/src/tu_nguyen/meshes/link_52.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint_52' type='revolute'>
+        <child>link_52</child>
+        <parent>link_4</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-0.4</lower>
+            <upper>0</upper>
+            <effort>300</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <static>0</static>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <pose frame=''>0 0 0.5 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>65 363000000</sim_time>
+      <real_time>65 844740374</real_time>
+      <wall_time>1612860625 491516361</wall_time>
+      <iterations>65363</iterations>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tu_nguyen'>
+        <pose frame=''>-0.002842 0.00099 -1e-06 8e-06 6e-06 -0.077517</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-0.002842 0.00099 -1e-06 8e-06 6e-06 -0.077517</pose>
+          <velocity>-9.6e-05 -4.5e-05 0.000608 0.02584 0.017358 -0.001334</velocity>
+          <acceleration>1.0594 -1.98536 1.15958 -2.23312 -0.254575 -2.75334</acceleration>
+          <wrench>0.372738 -0.698531 0.407986 0 -0 0</wrench>
+        </link>
+        <link name='link_1'>
+          <pose frame=''>-0.002842 0.00099 0.059999 1.1e-05 8e-06 -0.077417</pose>
+          <velocity>0.000803 -0.001394 0.000436 0.027122 0.018458 -0.001297</velocity>
+          <acceleration>2.19213 -3.70214 1.46959 -2.21856 -0.708758 0.86453</acceleration>
+          <wrench>0.392019 -0.662053 0.262807 0 -0 0</wrench>
+        </link>
+        <link name='link_2'>
+          <pose frame=''>-0.004597 -0.022976 0.103997 1.1e-05 -0.002389 -0.077421</pose>
+          <velocity>0.00074 -0.001279 -0.000855 0.023069 0.013733 -0.002442</velocity>
+          <acceleration>3.19605 -5.20318 -0.674148 -0.82922 -0.517626 0.944293</acceleration>
+          <wrench>0.23545 -0.383313 -0.049664 0 -0 0</wrench>
+        </link>
+        <link name='link_3'>
+          <pose frame=''>-0.004889 -0.022953 0.225935 1e-05 -0.005561 -0.077431</pose>
+          <velocity>0.000748 -0.001979 -0.002066 0.016844 0.007872 -0.012826</velocity>
+          <acceleration>3.4213 -6.04487 -3.13741 2.66954 -0.647286 1.30408</acceleration>
+          <wrench>0.292025 -0.51596 -0.267794 0 -0 0</wrench>
+        </link>
+        <link name='link_4'>
+          <pose frame=''>-0.005522 -0.022905 0.339931 1.3e-05 -0.007323 -0.077435</pose>
+          <velocity>-0.000623 -0.002451 -0.003507 0.007376 0.00553 -0.034044</velocity>
+          <acceleration>2.47038 -5.38814 -6.23945 0.634853 0.709797 1.21853</acceleration>
+          <wrench>0.151778 -0.331043 -0.383347 0 -0 0</wrench>
+        </link>
+        <link name='link_51'>
+          <pose frame=''>-0.003835 -0.013332 0.41619 0.400105 -0.007321 -0.077434</pose>
+          <velocity>-0.000187 -0.002864 -0.003483 -0.017382 0.001333 -0.030645</velocity>
+          <acceleration>-0.234519 -1.80507 -4.68566 0.898844 1.2388 -0.860682</acceleration>
+          <wrench>-0.001115 -0.008583 -0.02228 0 -0 0</wrench>
+        </link>
+        <link name='link_52'>
+          <pose frame=''>-0.001747 0.013587 0.41619 -0.399988 -0.007324 -0.077437</pose>
+          <velocity>0.000922 -0.002939 -0.003461 0.007623 0.003432 -0.036955</velocity>
+          <acceleration>3.85704 -6.77443 -6.61612 1.54003 -1.11678 1.43468</acceleration>
+          <wrench>0.018339 -0.032211 -0.031458 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>5 -5 2 0 0.275643 2.35619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

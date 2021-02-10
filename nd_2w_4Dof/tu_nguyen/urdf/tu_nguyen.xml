@@ -1,0 +1,6 @@
+<robot file="tu_nguyen.dae">
+    <Manipulator name="tu_nguyen.urdf">
+        <base>base_link</base>
+        <effector>link_51</effector>
+    </Manipulator>
+</robot>
