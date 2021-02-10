@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <include file="$(find nd_control)/launch/ekf_navsat.launch">
+  </include> 
+
+  <include file="$(find tu_nguyen)/launch/nd_description.launch">
+    <arg name="sim" value="true"/>
+  </include>
+
+
+  <arg name="world" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--arg name="world_name" value="$(find mybot_gazebo)/worlds/mybot.world"/-->
+    <arg name="world_name" value="$(find mybot_gazebo)/worlds/turtlebot_playground.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/>
+
+  <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+   args="-urdf -param robot_description -model mybot -x 0 -y 0 -z 0 " />
+
+
+  <node name="fake_joint_calibration" pkg="rostopic"  type="rostopic" args="pub /calibrated std_msgs/Bool true" />
+
+  <rosparam file="$(find tu_nguyen)/config/joint_state_controller.yaml" command="load"/>
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+   <!--start this controller--> 
+  <rosparam file="$(find tu_nguyen)/config/arm_controller.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
+
+</launch>
