@@ -8,4 +8,5 @@ Go Youtube (click photo)
 
 
 first you go >> roslaunch mybot_gazebo mybot_world.launch 
+
 and then other terminal you run >> roslaunch mybot_navigation teb_local.launch 
