@@ -184,7 +184,7 @@
         <parent link="link_4" />
         <child link="link_51" />
         <axis xyz="1 0 0" />
-        <limit lower="0" upper="0.4" effort="300" velocity="1" />
+        <limit lower="0" upper="0.4" effort="1" velocity="1" />
     </joint>
     <link name="link_52">
         
@@ -215,7 +215,7 @@
         <parent link="link_4" />
         <child link="link_52" />
         <axis xyz="1 0 0" />
-        <limit lower="-0.4" upper="0" effort="300" velocity="1" />
+        <limit lower="-0.4" upper="0" effort="1" velocity="1" />
     </joint>
     
 
@@ -262,25 +262,21 @@
         <transmission name="trans_joint_51">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="joint_51">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
         <actuator name="joint_51_motor">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-
                 <mechanicalReduction>1</mechanicalReduction>
-                <motorTorqueConstant>1</motorTorqueConstant>
+                
         </actuator>
     </transmission>
         <transmission name="trans_joint_52">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="joint_52">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
         <actuator name="joint_52_motor">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-
                 <mechanicalReduction>1</mechanicalReduction>
-                <motorTorqueConstant>1</motorTorqueConstant>
+                
         </actuator>
     </transmission>
 

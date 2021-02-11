@@ -7,4 +7,9 @@ controller_list:
       - joint_2
       - joint_3
       - joint_4
-
+  - name: hand_controller
+    action_ns: "follow_joint_trajectory"
+    type: FollowJointTrajectory
+    joints: 
+      - joint_51
+      - joint_52
