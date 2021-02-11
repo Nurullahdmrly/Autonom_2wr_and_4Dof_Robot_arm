@@ -23,6 +23,7 @@ from moveit_commander import move_group
 moveit_commander.roscpp_initialize(sys.argv)
 rospy.init_node('move_group_python_interface_tutorial', anonymous=True)
 
+hand = move_group.MoveGroupCommander("hand")
 robot = moveit_commander.RobotCommander()
 scene = moveit_commander.PlanningSceneInterface()    
 group = move_group.MoveGroupCommander("arm")
@@ -182,7 +183,7 @@ def execute_plan(plan):
     group.execute(plan, wait=True)
 
 
-def go_to_joint_state(j0,j1,j2,j3,):
+def go_to_joint_state(j0):
     # Copy class variables to local variables to make the web tutorials more clear.
     # In practice, you should use the class variables directly unless you have a good
     # reason not to.
@@ -195,24 +196,25 @@ def go_to_joint_state(j0,j1,j2,j3,):
     ## The Panda's zero configuration is at a `singularity <https://www.quora.com/Robotics-What-is-meant-by-kinematic-singularity>`_ so the first
     ## thing we want to do is move it to a slightly better configuration.
     # We can get the joint values from the group and adjust some of the values:
-    joint_goal = group.get_current_joint_values()
-    joint_goal[0] = j0
-    joint_goal[1] = j1
-    joint_goal[2] = j2
-    joint_goal[3] = j3
-
-
+    joint_goal = hand.get_current_joint_values()
+    print(joint_goal)
+    if j0 == 0:
+        joint_goal[0] = 0.001
+        joint_goal[1] = -0.001
+    else:
+        joint_goal[0] = 0.39
+        joint_goal[1] = -0.39
     # The go command can be called with joint values, poses, or without any
     # parameters if you have already set the pose or joint target for the group
-    group.go(joint_goal, wait=True)
-    print(joint_goal)
+    hand.go(joint_goal,wait=True)
+ 
     # Calling ``stop()`` ensures that there is no residual movement
-    group.stop()
+    hand.stop()
 
     ## END_SUB_TUTORIAL
 
     # For testing:
-    current_joints = group.get_current_joint_values()
+    current_joints = hand.get_current_joint_values()
     return all_close(joint_goal, current_joints, 0.01)
 
 def go_to_pose_goal(b,c,d,x,y,z,w):
@@ -231,7 +233,7 @@ def go_to_pose_goal(b,c,d,x,y,z,w):
     #arm = move_group.MoveGroupCommander("arm")
     group.set_goal_orientation_tolerance(0.3)
     group.set_goal_position_tolerance(0.02)
-    group.set_pose_reference_frame("map")
+    group.set_pose_reference_frame("base_link")
     #arm.set_pose_reference_frame("link_1")
     #arm.go()
     #print(arm.get_current_pose())
@@ -262,19 +264,14 @@ def go_to_pose_goal(b,c,d,x,y,z,w):
     print("plan executed")
     print(group.get_current_pose())
     print(group.get_current_rpy())
-    # For testing:
-    # Calling `stop()` ensures that there is no residual movement
-    group.stop()
-    # It is always good to clear your targets after planning with poses.
-    # Note: there is no equivalent function for clear_joint_value_targets()
-    group.clear_pose_targets()
-    ## END_SUB_TUTORIAL
 
     # For testing:
     # Note that since this section of code will not be included in the tutorials
     # we use the class variable rather than the copied state variable
     current_pose = group.get_current_pose().pose
     return all_close(pose_goal, current_pose, 0.01)
+
+
 
 def movebase_client(x1,y1,o1,o2,o3,o4):
 
@@ -347,11 +344,12 @@ class Pencere (QtWidgets.QWidget):
         self.j0 = QtWidgets.QLineEdit("0")
         self.j1 = QtWidgets.QLineEdit("0")
         self.j2 = QtWidgets.QLineEdit("0")
-        self.j3 = QtWidgets.QLineEdit("0")
         self.y0 = QtWidgets.QLabel("x: ")
         self.y1 = QtWidgets.QLabel("y: ")
         self.y2 = QtWidgets.QLabel("yaw (-3.14, 3.14): ")
-        self.y3 = QtWidgets.QLabel("...")
+        self.y3 = QtWidgets.QPushButton("Ac")
+        self.y4 = QtWidgets.QPushButton("Kapa")
+
 
         h_box = QtWidgets.QHBoxLayout()
         v_box = QtWidgets.QVBoxLayout()
@@ -364,7 +362,7 @@ class Pencere (QtWidgets.QWidget):
         c_box.addWidget(self.y2)
         c_box.addWidget(self.j2)
         c_box.addWidget(self.y3)
-        c_box.addWidget(self.j3)
+        c_box.addWidget(self.y4)
         c_box.addWidget(self.hes)
 
         v_box.addWidget(self.x)
@@ -395,6 +393,9 @@ class Pencere (QtWidgets.QWidget):
         self.yazdir.clicked.connect(self.click)
         self.hesapla.clicked.connect(self.click)
         self.hes.clicked.connect(self.click)
+        self.y3.clicked.connect(self.click)
+        self.y4.clicked.connect(self.click)
+
 
         self.setWindowTitle("Robot arm goal")
         self.setGeometry(100,100,500,500)
@@ -427,11 +428,15 @@ class Pencere (QtWidgets.QWidget):
             f4 = q[3]
             print(f1,f2,f3,f4 )
             go_to_pose_goal(a,b,c,f1,f2,f3,f4)
+        elif sender.text() == "Ac":
+            go_to_joint_state(1)
+        elif sender.text() == "Kapa":
+            go_to_joint_state(0)
         else:
             e1 = float(self.j0.text()) 
             e2 = float(self.j1.text()) 
             e3 = float(self.j2.text()) 
-            e4= float(self.j3.text()) 
+           
             l = quaternion_from_euler(0, 0, e3)
             f5 = l[0]
             f6 = l[1]
