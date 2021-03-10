@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <group>
+    
+        <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true" output="screen">
+            <rosparam command="load" file="$(find mybot_control)/config/navsat_params.yaml" />   
+            <remap from="odometry/filtered" to="odometry/filtered_map"/>
+            <remap from="gps/fix" to="mybot/navsat/fix"/>
+            <remap from="imu/data" to="mybot/imu/data"/>
+        </node>
+    </group>
+</launch>

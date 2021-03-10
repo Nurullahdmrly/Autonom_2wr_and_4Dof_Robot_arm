@@ -1,0 +1,20 @@
+<launch>
+
+  <rosparam command="load" file="$(find mybot_control)/config/ekf_navsat.yaml" />
+
+    <arg name="enable_ekf" default="$(optenv ENABLE_EKF true)"/>
+        <group if="$(arg enable_ekf)" >
+
+            <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true"/>
+
+            <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+                <remap from="odometry/filtered" to="odometry/filtered_map"/>
+            </node>
+            <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true">
+                <remap from="imu/data" to="mybot/imu/data"/>
+                <remap from="gps/fix" to="mybot/navsat/fix"/>
+                <remap from="odometry/filtered" to="odometry/filtered_map"/>
+            </node>
+        </group>
+
+</launch>
